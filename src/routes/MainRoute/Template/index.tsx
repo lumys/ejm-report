@@ -12,17 +12,18 @@ const Template = ({ routes }: TemplateProps) => {
   const theme = useTheme();
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', minHeight: '100vh' }}>
       <AppBar routes={routes} />
 
       <Box
         component="main"
         sx={{
+          display: 'flex',
           flexGrow: 1,
-          p: 3,
+          minHeight: '100%',
         }}
       >
-        <Box sx={{ ...theme.mixins.toolbar }} />
+        <Box sx={{ flex: 0, ...theme.mixins.toolbar }} />
         <Outlet />
       </Box>
     </Box>
