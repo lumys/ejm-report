@@ -4,10 +4,6 @@ import { MenuItem, MenuItemProps, styled, Typography } from '@mui/material';
 const NavButton = styled(MenuItem)(() => ({
   display: 'inline-block',
   marginRight: 60,
-  '&:hover, &.Mui-selected': {
-    borderBottomWidth: 1,
-    borderBottomColor: 'white',
-  },
 }));
 
 interface NavButtonProps extends MenuItemProps {
