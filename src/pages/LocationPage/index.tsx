@@ -14,6 +14,7 @@ export const locationPage: CustomDataRouteObject = {
   id: 'location',
   path: '/',
   element: <Page />,
+  headerOptions: { title: '구역검색' },
   loader,
 };
 

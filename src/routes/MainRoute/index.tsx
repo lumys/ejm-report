@@ -8,7 +8,7 @@ const routes: CustomDataRouteObject[] = [locationPage];
 const mainRoute: CustomDataRouteObject = {
   id: 'main',
   path: '/',
-  element: <Template />,
+  element: <Template routes={routes} />,
   children: routes,
   loader: undefined,
 };
