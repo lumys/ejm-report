@@ -1,13 +1,37 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { CustomDataRouteObject } from '@c-types/common';
 import Template from '@pages/LocationPage/Template';
-
-const loader = async () => {
-  return 'User';
-};
+import axiosInstance from '~/lib/initializer/axiosInitializer';
+import { URL_FETCH_BIZ_ZONE_LIST_DISTRICT } from '@constants/api';
+import { BizZoneType, FetchBizZoneListDistrictRequestType } from '@c-types/api';
+import Bounds = naver.maps.Bounds;
 
 const Page = () => {
-  return <Template />;
+  const [bizZoneList, setBizZoneList] = useState<BizZoneType[]>([]);
+
+  const fetchBizZoneListDistrict = useCallback(async (value: Bounds) => {
+    const request: FetchBizZoneListDistrictRequestType = {
+      level: 1,
+      neLat: value.maxY(),
+      neLng: value.maxX(),
+      swLat: value.minY(),
+      swLng: value.minX(),
+    };
+
+    const response = await axiosInstance.post(
+      URL_FETCH_BIZ_ZONE_LIST_DISTRICT,
+      request,
+    );
+
+    setBizZoneList(response.data);
+  }, []);
+
+  return (
+    <Template
+      onBoundsChanged={fetchBizZoneListDistrict}
+      bizZoneList={bizZoneList}
+    />
+  );
 };
 
 export const locationPage: CustomDataRouteObject = {
@@ -15,7 +39,6 @@ export const locationPage: CustomDataRouteObject = {
   path: '/',
   element: <Page />,
   headerOptions: { title: '구역검색' },
-  loader,
 };
 
 export default Page;

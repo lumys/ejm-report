@@ -1,18 +1,16 @@
 import React from 'react';
 import { ThemeProvider } from '@mui/material';
-import { NavermapsProvider } from 'react-naver-maps';
 import { RouterProvider } from 'react-router-dom';
 import router from '~/routes/rootRouter';
 import theme from '@styles/theme';
-
-const ncpClientId = 'f4gwmtnyhl';
+import { axiosInitializer } from '~/lib/initializer/axiosInitializer';
 
 const App = () => {
+  axiosInitializer().then();
+
   return (
     <ThemeProvider theme={theme}>
-      <NavermapsProvider ncpClientId={ncpClientId}>
-        <RouterProvider router={router} />
-      </NavermapsProvider>
+      <RouterProvider router={router} />
     </ThemeProvider>
   );
 };
